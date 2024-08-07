@@ -14,6 +14,7 @@ import (
 
 var addr = flag.String("addr", "localhost:8080", "websocket address")
 var path = flag.String("path", "/", "websocket endpoint")
+var port = flag.String("port", "4444", "proxy port")
 
 func main() {
 	flag.Parse()
@@ -21,8 +22,8 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandler)
 
-	log.Println("Listening to port 8000")
-	err := http.ListenAndServe(":8000", r)
+	log.Println("Listening to port " + *port)
+	err := http.ListenAndServe(":"+*port, r)
 	if err != nil {
 		log.Fatal(err)
 	}
